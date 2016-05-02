@@ -2,11 +2,52 @@
 <html>
 <head>
     <title>Hello WebSocket</title>
-    <script src="/static/sockjs-0.3.4.js"></script>
-    <script src="/static/stomp.js"></script>
-    <script type="text/javascript" src="/static/js/connection.js"> </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
+    
 </head>
 <body>
-    <h1>Hola mundo</h1>
+    
+    
+    <label id="message"></label>
+    <form id="send" method="post" >
+        <input type="submit" value="prender"/>
+    </form>
+
 </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript" >
+        $("#send").submit(function(event){
+                $('#message').text('Sending.....');
+                event.preventDefault();
+                var function_ = {id:1,name:"digitalWrite",attributes:[{id:1,type:"in",value:"1",name:"pin",input:"true"},
+                                                                    {id:2,type:"in",value:"1",name:"value",input:"true"}
+                                                                    ]
+                };
+                console.log(JSON.stringify(function_));
+                var url_="/api/function";
+                $.ajax({
+                        type: "POST",
+                        url: url_,
+                        // The key needs to match your method's input parameter (case-sensitive).
+                        data: JSON.stringify( function_ ),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        type:"POST",
+                        crossDomain: true,
+                      success: function(data) {
+                         $('#message').text('The page has been successfully loaded');
+                      },
+                      error: function() {
+                         $('#message').text('An error occurred');
+                      }
+                  });
+            
+        });
+    </script>
 </html>

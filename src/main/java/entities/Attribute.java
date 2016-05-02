@@ -12,6 +12,8 @@ public class Attribute {
 	private Long id;  
 	private String type;
 	private Boolean input;
+	private String value;
+	private String name;
 	@ManyToOne
 	private Function function;
 	
@@ -22,6 +24,22 @@ public class Attribute {
 
 	public void setFunction(Function function) {
 		this.function = function;
+	}
+	
+	public String getValue() {
+		return value;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	public Attribute() {
